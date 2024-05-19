@@ -87,6 +87,22 @@ if (isset($_POST['checkout'])) {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="asset/css/output.css">
+    <style>
+        /* CSS untuk mengubah warna tombol menjadi coklat */
+        .btn-checkout {
+            background-color: #964B00;
+            /* Warna latar belakang coklat */
+            border-color: #964B00;
+            /* Warna border coklat */
+        }
+
+        .btn-checkout:hover {
+            background-color: transparent;
+            /* Warna latar belakang transparan saat hover */
+            color: #964B00;
+            /* Warna teks coklat saat hover */
+        }
+    </style>
     <title>Home</title>
 </head>
 
@@ -116,7 +132,7 @@ if (isset($_POST['checkout'])) {
                         <div id="address-info" class="mt-2"></div>
                     </div>
 
-                    <button type="submit" name="checkout" class="block w-full py-3 px-4 text-center text-white bg-green-500 border border-green-500 rounded-md hover:bg-transparent hover:text-green-500 transition font-medium">Place order</button>
+                    <button type="submit" name="checkout" class="btn-checkout block w-full py-3 px-4 text-center text-white border border-brown-500 rounded-md hover:bg-transparent hover:text-brown-500 transition font-medium">Place order</button>
                 </form>
             </div>
         </div>
