@@ -94,6 +94,9 @@
 </head>
 
 <body>
+    <?php
+    include 'connection.php';
+    ?>
     <!-- header -->
     <header class="py-4 shadow-sm bg-beige">
         <div class="container flex items-center justify-between mx-auto">
@@ -133,20 +136,20 @@
                     <i class="fa-solid fa-bars"></i>
                 </span>
                 <span class="capitalize ml-2">All Categories</span>
-                <?php
-                $sql = "SELECT * FROM kategori";
-                include 'connection.php';
-                $result = pg_query($conn, $sql);
-                while ($row = pg_fetch_object($result)) {
-                ?>
-                    <!-- dropdown -->
-                    <div class="absolute w-full left-0 top-full bg-white shadow-md py-3 divide-y divide-gray-300 divide-dashed opacity-0 group-hover:opacity-100 transition duration-300 invisible group-hover:visible">
+                <div style="position: absolute; top: 100%" class="absolute w-full left-0 top-full bg-white shadow-md py-3 divide-y divide-gray-300 divide-dashed opacity-0 group-hover:opacity-100 transition duration-300 invisible group-hover:visible">
+
+                    <?php
+                    $sql = "SELECT * FROM kategori";
+                    $result = pg_query($conn, $sql);
+                    while ($row = pg_fetch_object($result)) {
+                    ?>
+                        <!-- dropdown -->
                         <a href="../../search.php?id=<?php echo $row->kategori_id; ?>" class="flex items-center px-6 py-3 hover:bg-gray-100 transition">
                             <img src="<?php echo $row->kategori_img; ?>" alt="category" class="w-5 h-5 object-contain">
                             <span class="ml-6 text-gray-600 text-sm"><?php echo $row->nama_kategori; ?></span>
                         </a>
-                    </div>
-                <?php } ?>
+                    <?php } ?>
+                </div>
             </div>
 
             <div class="flex items-center justify-between flex-grow md:pl-12 py-5">
