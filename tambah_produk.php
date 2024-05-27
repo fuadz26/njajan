@@ -1,23 +1,29 @@
 <?php
+require 'vendor/autoload.php';
+
+use Aws\S3\S3Client;
+use Aws\Exception\AwsException;
+
 session_start();
 include 'asset/php/connection.php';
 
-// Periksa jika form telah disubmit
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Ambil data dari form
+
     $nama_produk = $_POST['nama_produk'];
-    $kategori_produk = $_POST['kategori_produk']; // Retrieve the selected category ID
+    $kategori_produk = $_POST['kategori_produk'];
     $harga_produk = $_POST['harga_produk'];
     $stok_produk = $_POST['stok_produk'];
     $deskripsi_produk = $_POST['deskripsi_produk'];
 
-    // Periksa apakah semua kolom wajib telah diisi
+
     if (empty($nama_produk) || empty($kategori_produk) || empty($harga_produk) || empty($stok_produk) || empty($deskripsi_produk)) {
         echo "Silakan isi semua kolom yang wajib.";
         exit;
     }
 
-    // Proses file yang diunggah, jika ada
+
     $uploadDir = './asset/file/';
     $fileName = $_FILES['gambar_produk']['name'];
     $tmpName = $_FILES['gambar_produk']['tmp_name'];
@@ -33,25 +39,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
     } else {
-        // Set default file path jika tidak ada file yang diunggah
-        $filePath = 'default.jpg'; // Ganti dengan path file default Anda atau biarkan seperti itu
+
+        $filePath = 'default.jpg';
+    }
+    $awsConfig = [
+        'version' => 'latest',
+        'region'  => 'ap-northeast-3',
+        'credentials' => [
+            'key'    => 'AKIA5FTZEUCNVLLQKMEP',
+            'secret' => '',
+        ],
+    ];
+
+
+    $s3Client = new S3Client($awsConfig);
+
+
+    $bucketName = 'njajan2';
+    $s3Key = 'produk/' . $username . '/' . $fileName;
+
+    // Fungsi untuk mengunggah file ke S3
+    function uploadFileToS3($s3Client, $bucketName, $filePath, $s3Key)
+    {
+        try {
+            $result = $s3Client->putObject([
+                'Bucket' => $bucketName,
+                'Key'    => $s3Key,
+                'SourceFile' => $filePath,
+            ]);
+            echo "File berhasil diunggah ke S3. URL: " . $result['ObjectURL'] . "\n";
+            return $result['ObjectURL'];
+        } catch (AwsException $e) {
+            echo "Gagal mengunggah file ke S3: " . $e->getMessage() . "\n";
+            return false;
+        }
     }
 
-    // Dapatkan ID pengguna dan ID toko dari sesi
+
+    $s3Url = uploadFileToS3($s3Client, $bucketName, $filePath, $s3Key);
     $user_id = $_SESSION['user_id'];
     $toko_id = $_SESSION['toko_id'];
 
-    // Masukkan produk baru ke dalam database
-    $sql = "INSERT INTO produk (nama_produk, kategori_id, harga_produk, stok_produk, deskripsi_produk, produk_img, toko_id) VALUES ('$nama_produk', '$kategori_produk', '$harga_produk', '$stok_produk', '$deskripsi_produk', '$filePath', '$toko_id')";
-    $result = pg_query($conn, $sql);
+    if ($s3Url) {
 
-    if ($result) {
-        // Alihkan ke halaman daftar produk setelah penambahan berhasil
-        header("Location: list_product.php");
-        exit;
-    } else {
-        echo "Gagal menambahkan produk.";
+        $sql = "INSERT INTO produk (nama_produk, kategori_id, harga_produk, stok_produk, deskripsi_produk, produk_img, toko_id) VALUES ('$nama_produk', '$kategori_produk', '$harga_produk', '$stok_produk', '$deskripsi_produk', '$s3Url', '$toko_id')";
+        $result = pg_query($conn, $sql);
+
+        if ($result === false) {
+            echo "Error updating database";
+            exit;
+        }
     }
+
+    header("Location: list_product.php");
+    echo "<br>File uploaded<br>";
+
+    exit;
 }
 
 ?>
@@ -81,11 +124,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user_id'] = $row->user_id;
     ?>
 
-        <!-- wrapper -->
+
         <div class="container grid grid-cols-12 items-start gap-6 pt-4 pb-16 mx-auto" style="padding-left: 100px;padding-right: 100px">
 
-            <!-- sidebar -->
-            <!-- sidebar -->
+
             <div class="col-span-3">
                 <div class="px-4 py-3 shadow flex items-center gap-4">
                     <div class="flex-shrink-0">
