@@ -28,6 +28,6 @@ if (empty($id) || empty($name) || empty($address) || empty($city) || empty($kode
         echo $result;
     } else {
         $_SESSION['alert_message'] = "Data berhasil ditambahkan!";
-        header("location: address.php?=$id"); // mengalihkan ke halaman index
+        header("location: address.php?id=$id"); // mengalihkan ke halaman index
     }
 }

@@ -20,6 +20,7 @@ session_start();
     <?php
     include 'asset/php/navbar.php';
     include 'asset/php/connection.php';
+    include 'asset/php/connects3.php';
     if (isset($_SESSION['user'])) {
         $user = $_SESSION['user'];
     } else
