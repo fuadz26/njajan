@@ -7,7 +7,10 @@ use Aws\Exception\AwsException;
 $awsConfig = [
     'version' => 'latest',
     'region'  => 'ap-northeast-3',
-    'credentials' => [],
+    'credentials' => [
+        'key'    => 'AKIA5FTZEUCNVLLQKMEP',
+        'secret' => '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',
+    ],
 ];
 
 // Buat instance S3Client
