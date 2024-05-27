@@ -45,10 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $awsConfig = [
         'version' => 'latest',
         'region'  => 'ap-northeast-3',
-        'credentials' => [
-            'key'    => 'AKIA5FTZEUCNVLLQKMEP',
-
-        ],
+        'credentials' => [],
     ];
 
 
