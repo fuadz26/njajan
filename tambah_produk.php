@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'region'  => 'ap-northeast-3',
         'credentials' => [
             'key'    => 'AKIA5FTZEUCNVLLQKMEP',
-            'secret' => '',
+
         ],
     ];
 

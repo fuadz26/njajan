@@ -9,7 +9,7 @@ $awsConfig = [
     'region'  => 'ap-northeast-3',
     'credentials' => [
         'key'    => 'AKIA5FTZEUCNVLLQKMEP',
-        'secret' => '',
+
     ],
 ];
 

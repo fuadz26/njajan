@@ -33,7 +33,7 @@ if (isset($_POST['upload'])) {
         'region'  => 'ap-northeast-3',
         'credentials' => [
             'key'    => 'AKIA5FTZEUCNVLLQKMEP',
-            'secret' => '',
+
         ],
     ];
 
