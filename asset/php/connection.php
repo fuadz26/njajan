@@ -1,5 +1,5 @@
 <?php
-$host = "njajan-2.clky42we419p.ap-northeast-3.rds.amazonaws.com";
+$host = "localhost";
 $user = "postgres";
 $password = "zakizaki123";
 $dbname = "zipedia";

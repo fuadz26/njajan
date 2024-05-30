@@ -1102,6 +1102,10 @@ input:checked + .toggle-bg {
   grid-column: span 9 / span 9;
 }
 
+.m-\[0-9a-f\] {
+  margin: 0-9a-f;
+}
+
 .-my-2 {
   margin-top: -0.5rem;
   margin-bottom: -0.5rem;
@@ -1218,6 +1222,10 @@ input:checked + .toggle-bg {
   display: grid;
 }
 
+.contents {
+  display: contents;
+}
+
 .hidden {
   display: none;
 }
@@ -1252,6 +1260,10 @@ input:checked + .toggle-bg {
 
 .h-80 {
   height: 20rem;
+}
+
+.h-\[0-9a-z\] {
+  height: 0-9a-z;
 }
 
 .h-full {
@@ -1778,6 +1790,10 @@ input:checked + .toggle-bg {
   padding: 1.5rem;
 }
 
+.p-\[0-9a-zA-Z_\] {
+  padding: 0-9a-zA-Z;
+}
+
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -1894,6 +1910,11 @@ input:checked + .toggle-bg {
   padding-right: 0.75rem;
 }
 
+.ps-\[a-zA-Z0-9-\.\/\] {
+  -webkit-padding-start: a-zA-Z0-9-./;
+          padding-inline-start: a-zA-Z0-9-./;
+}
+
 .pt-2 {
   padding-top: 0.5rem;
 }
@@ -1985,6 +2006,10 @@ input:checked + .toggle-bg {
 
 .uppercase {
   text-transform: uppercase;
+}
+
+.lowercase {
+  text-transform: lowercase;
 }
 
 .capitalize {
@@ -2141,6 +2166,11 @@ input:checked + .toggle-bg {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
+.invert {
+  --tw-invert: invert(100%);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
@@ -2171,6 +2201,78 @@ input:checked + .toggle-bg {
 
 .ease-out {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.\[a-f0-9\:\.\/\] {
+  a-f0-9: ./;
+}
+
+.\[a-fA-F0-9\:\\\\\.\\\\\/\] {
+  a-f-a--f0-9: \\.\\/;
+}
+
+.\[a-zA-Z-0-9-\:\\\\\/\.\] {
+  a-z-a--z-0-9-: \\/.;
+}
+
+.\[a-zA-Z-0-9-\:\\\\\/\] {
+  a-z-a--z-0-9-: \\/;
+}
+
+.\[a-zA-Z0-9-\:\/\] {
+  a-z-a--z0-9-: /;
+}
+
+.\[a-zA-Z0-9-_\:\.\/\!\*\\\'\(\)\] {
+  a-z-a--z0-9-_: ./!*\'();
+}
+
+.\[a-zA-Z0-9\:\*\/-\] {
+  a-z-a--z0-9: */-;
+}
+
+.\[a-zA-Z0-9\:-\] {
+  a-z-a--z0-9: -;
+}
+
+.\[a-zA-Z0-9\:\/-\] {
+  a-z-a--z0-9: /-;
+}
+
+.\[a-zA-Z0-9\:\/_-\] {
+  a-z-a--z0-9: / -;
+}
+
+.\[a-zA-Z0-9\:\\\\\/\\\\\._-\] {
+  a-z-a--z0-9: \\/\\. -;
+}
+
+.\[a-zA-Z0-9\:_-\] {
+  a-z-a--z0-9: -;
+}
+
+.\[a-zA-Z0-9\:_\/\+\=\2c \@\.\#-\] {
+  a-z-a--z0-9: /+=,@.#-;
+}
+
+.\[a-zA-Z0-9\:_\/-\] {
+  a-z-a--z0-9: /-;
+}
+
+.\[a-zA-Z0-9_\:\.-\] {
+  a-z-a--z0-9_: .-;
+}
+
+.\[a-zA-Z0-9_\:\.\/\2c \] {
+  a-z-a--z0-9_: ./,;
+}
+
+.\[a-zA-Z0-9_\:\\\\-\\\\\/\] {
+  a-z-a--z0-9_: \\-\\/;
+}
+
+.\[hostname\:port\] {
+  hostname: port;
 }
 
 .hover\:border-gray-300:hover {

@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php
+    session_start();
+    if (isset($_SESSION['alert_message'])) {
+        echo "<script>alert('" . $_SESSION['alert_message'] . "');</script>";
+        unset($_SESSION['alert_message']);
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,7 +43,9 @@
     if (isset($_SESSION['user'])) {
         $user = $_SESSION['user'];
     }
+
     ?>
+    
 
     <!-- Banner -->
     <div class="bg-cover bg-no-repeat bg-center py-36">
