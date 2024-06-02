@@ -8,7 +8,7 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 $code = md5($email . date('Y-m-d'));
 
-require '../../vendor/autoload.php'; // Pastikan jalur ini benar
+require '../../vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -26,7 +26,6 @@ if (empty($name) || empty($email) || empty($username) || empty($password)) {
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'ahmadfuadi2611@gmail.com';
-        $mail->Password = 'uxbycneydxcliwib'; // Gunakan kata sandi aplikasi
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = 465;
 
@@ -42,9 +41,8 @@ if (empty($name) || empty($email) || empty($username) || empty($password)) {
         echo 'Message has been sent';
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        
     }
-  
+
 
     $sql = "INSERT INTO users (nama_lengkap, email, username, password, kode_verif) VALUES ('$name', '$email', '$username', '$password', '$code')";
     $result = pg_query($conn, $sql);
@@ -59,4 +57,3 @@ if (empty($name) || empty($email) || empty($username) || empty($password)) {
         header("Location: ../../login.php");
     }
 }
-?>
