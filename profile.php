@@ -6,144 +6,190 @@ session_start();
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible"="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="asset/css/output.css">
-    <title>Login</title>
+    <title>Profile</title>
+    <style>
+        .text-brown-500 {
+            color: #8B4513;
+        }
+
+        .text-brown-600 {
+            color: #A0522D;
+        }
+
+        .text-brown-800 {
+            color: #5C4033;
+        }
+
+        .bg-brown-500 {
+            background-color: #8B4513;
+        }
+
+        .border-brown-500 {
+            border-color: #8B4513;
+        }
+
+        .hover\:text-brown-500:hover {
+            color: #8B4513;
+        }
+
+        .hover\:bg-brown-500:hover {
+            background-color: #8B4513;
+            color: #FFF;
+        }
+
+        .hover\:bg-transparent:hover {
+            background-color: transparent;
+            color: #8B4513;
+        }
+
+        .sidebar {
+            background-color: #8B4513;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: #FFF;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #FFF;
+        }
+
+        .sidebar-header img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border: 2px solid #FFF;
+        }
+
+        .sidebar-content {
+            margin-top: 20px;
+        }
+
+        .sidebar-link {
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            color: #FFF;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sidebar-link:hover {
+            background-color: #A0522D;
+        }
+
+        .sidebar-link i {
+            margin-right: 10px;
+        }
+    </style>
 </head>
 
 <body>
     <?php
     include 'asset/php/navbar.php';
     include 'asset/php/connection.php';
-    include 'asset/php/connects3.php';
+
     if (isset($_SESSION['user'])) {
         $user = $_SESSION['user'];
-    } else
-        echo 'Fail contol';
+    } else {
+        echo 'Fail control';
+    }
+
     $sql = "SELECT * FROM users WHERE username = '$user'";
     $result = pg_query($conn, $sql);
     while ($row = pg_fetch_object($result)) {
     ?>
-        <!-- wrapper -->
+
         <div class="container grid grid-cols-12 items-start gap-6 pt-4 pb-16 mx-auto" style="padding-left: 100px;padding-right: 100px">
-
-            <!-- sidebar -->
             <div class="col-span-3">
-                <div class="px-4 py-3 shadow flex items-center gap-4">
-                    <div class="flex-shrink-0">
-                        <img src="<?php echo $row->user_img; ?>" alt="profile" class="rounded-full w-14 h-14 border border-gray-200 p-1 object-cover">
+                <div class="sidebar">
+                    <div class="sidebar-header">
+                        <img src="<?php echo $row->user_img; ?>" alt="profile">
+                        <div>
+                            <p>Hello,</p>
+                            <h4><?php echo $row->username; ?></h4>
+                        </div>
                     </div>
-                    <div class="flex-grow">
-                        <p class="text-gray-600">Hello,</p>
-                        <h4 class="text-gray-800 font-medium"><?php echo $row->username; ?></h4>
-                    </div>
-                </div>
-
-                <div class="mt-6 bg-white shadow rounded p-4 divide-y divide-gray-200 space-y-4 text-gray-600">
-                    <div class="space-y-1 pl-8">
-                        <a href="profile.php" class="block font-medium capitalize transition">
-                            <span class="absolute -left-8 top-0 text-base">
-                                <i class="fa-regular fa-address-card"></i>
-                            </span>
+                    <div class="sidebar-content">
+                        <a href="profile.php" class="sidebar-link">
+                            <i class="fa-regular fa-address-card"></i>
                             Manage account
                         </a>
-                        <a href="profile.php" class="relative   text-green-500 hover:text-green-500 block capitalize transition">
+                        <a href="profile.php" class="sidebar-link">
                             Profile information
                         </a>
-                        <a href="address.php?id=<?php echo $user_id; ?> " class="relative  hover:text-green-500 block capitalize transition">
+                        <a href="address.php?id=<?php echo $user_id; ?>" class="sidebar-link">
                             Manage addresses
                         </a>
-                        <a href="#" class="relative hover:text-green-500 block capitalize transition">
-                            Change password
-                        </a>
-                    </div>
 
-                    <div class="space-y-1 pl-8 pt-4">
-                        <a href="wishlist.php" class="relative  block font-medium capitalize transition">
-                            <span class="absolute -left-8 top-0 text-base">
-                                <i class="fa-solid fa-bag-shopping"></i>
-                            </span>
+                        <a href="wishlist.php" class="sidebar-link">
+                            <i class="fa-solid fa-bag-shopping"></i>
                             My Cart
                         </a>
-                    </div>
-                    <div class="space-y-1 pl-8 pt-4">
-                        <a href="toko.php" class="relative block font-medium capitalize transition">
-                            <span class="absolute -left-8 top-0 text-base">
-                                <i class="fa-solid fa-shop"></i>
-                            </span>
-                            TOKO kuu
+                        <a href="toko.php" class="sidebar-link">
+                            <i class="fa-solid fa-shop"></i>
+                            My Store
                         </a>
+                        <a href="tambah_produk.php" class="sidebar-link">
+                            Add Product
                         </a>
-                        <a href="tambah_produk.php" class="relative  hover:text-green-500 block capitalize transition">
-                            add Product
-                        </a>
-                        <a href="list_product.php" class="relative block capitalize transition">
+                        <a href="list_product.php" class="sidebar-link">
                             Product Listed
                         </a>
-                        <a href="Order.php" class="relative block capitalize transition">
-                            Order
+                        <a href="order.php" class="sidebar-link">
+                            Orders
                         </a>
-                    </div>
-
-                    <div class="space-y-1 pl-8 pt-4">
-                        <a href="asset/php/logout.php" class="relative hover:text-green-500 block font-medium capitalize transition">
-                            <span class="absolute -left-8 top-0 text-base">
-                                <i class="fa-solid fa-right-from-bracket"></i>
-                            </span>
+                        <a href="asset/php/logout.php" class="sidebar-link">
+                            <i class="fa-solid fa-right-from-bracket"></i>
                             Logout
                         </a>
                     </div>
-
                 </div>
             </div>
-            <!-- ./sidebar -->
 
-            <!-- info -->
             <div class="col-span-9 space-y-4">
-                <div class=" flex items-center justify-between border gap-6 p-4 border-gray-200 rounded">
+                <div class="flex items-center justify-between border gap-6 p-4 border-gray-200 rounded">
                     <div class="w-1/3">
-                        <div class=" flex-shrink-1">
-                            <img src="<?php echo $row->user_img; ?>" alt="profile" class="rounded-full w-72  h-72 border border-gray-200 p-1 object-cover">
+                        <div class="flex-shrink-1">
+                            <img src="<?php echo $row->user_img; ?>" alt="profile" class="rounded-full w-72 h-72 border border-gray-200 p-1 object-cover">
                         </div>
                         <form action="upload.php" method="POST" enctype="multipart/form-data">
                             <input type="file" id="user_img" name="user_img" class="mt-2">
-                            <button type="submit" name="upload" class="px-4 py-2 mt-2 text-sm text-white bg-green-500 border border-green-500 rounded hover:bg-transparent hover:text-green-500 transition uppercase font-roboto font-medium">
-                                Upload Foto</button>
-
-                            <a href="edit_user.php" class="px-6 py-2 text-center text-sm text-white bg-green-500 border border-green-500 rounded hover:bg-transparent hover:text-green-500 transition uppercase font-roboto font-medium">
-                                Edit</a>
-
+                            <button type="submit" name="upload" class="px-4 py-2 mt-2 text-sm text-white bg-brown-500 border border-brown-500 rounded hover:bg-transparent hover:text-brown-500 transition uppercase font-roboto font-medium">
+                                Upload Foto
+                            </button>
+                            <a href="edit_user.php" class="px-6 py-2 text-center text-sm text-white bg-brown-500 border border-brown-500 rounded hover:bg-transparent hover:text-brown-500 transition uppercase font-roboto font-medium">
+                                Edit
+                            </a>
                         </form>
                     </div>
-                    <div class=" pb-24 w-1/2">
+                    <div class="pb-24 w-1/2">
                         <h2 class="text-gray-800 text-xl font-medium uppercase">Username</h2>
-                        <p class="text-gray-500 text-lg"><?php echo $row->username; ?> <span class="text-green-600"></span>
-                        </p>
+                        <p class="text-gray-500 text-lg"><?php echo $row->username; ?> <span class="text-brown-600"></span></p>
                         <h2 class="text-gray-800 text-xl font-medium uppercase">Nama Lengkap</h2>
-                        <p class="text-gray-500 text-lg"><?php echo $row->nama_lengkap; ?> <span class="text-green-600"></span></p>
+                        <p class="text-gray-500 text-lg"><?php echo $row->nama_lengkap; ?> <span class="text-brown-600"></span></p>
                         <h2 class="text-gray-800 text-xl font-medium uppercase">Email</h2>
-                        <p class="text-gray-500 text-lg"><?php echo $row->email; ?> <span class="text-green-600"></span></p>
+                        <p class="text-gray-500 text-lg"><?php echo $row->email; ?> <span class="text-brown-600"></span></p>
                         <h2 class="text-gray-800 text-xl font-medium uppercase">Alamat</h2>
-                        <p class="text-gray-500 text-lg"><?php echo $row->alamat; ?><span class="text-green-600"></span></p>
-                        <h2 class="text-gray-800 text-xl font-medium uppercase">No. Haandphone</h2>
-                        <p class="text-gray-500 text-lg"><?php echo $row->nomor_telepon ?> <span class="text-green-600"></span></p>
-
+                        <p class="text-gray-500 text-lg"><?php echo $row->alamat; ?><span class="text-brown-600"></span></p>
+                        <h2 class="text-gray-800 text-xl font-medium uppercase">No. Handphone</h2>
+                        <p class="text-gray-500 text-lg"><?php echo $row->nomor_telepon ?> <span class="text-brown-600"></span></p>
                     </div>
-
                 </div>
-
             <?php } ?>
-
             </div>
-            <!-- ./info -->
         </div>
-
-
 </body>
 
 </html>

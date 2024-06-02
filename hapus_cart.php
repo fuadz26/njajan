@@ -1,10 +1,10 @@
 <?php
-// koneksi database
+
 include 'asset/php/connection.php';
-// memulai session
+
 session_start();
 
-// menangkap data yang dikirim melalui URL
+
 $id = $_GET['id'];
 
 if (empty($id)) {
@@ -23,6 +23,6 @@ if ($result) {
     exit;
 } else {
     $_SESSION['alert_message'] = "Terjadi kesalahan saat menghapus data.";
-    $error = pg_last_error($conn); // Mendapatkan pesan kesalahan dari PostgreSQL
+    $error = pg_last_error($conn);
     echo $error;
 }

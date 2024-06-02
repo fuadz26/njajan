@@ -1,9 +1,9 @@
 <?php
-    session_start();
-    if (isset($_SESSION['alert_message'])) {
-        echo "<script>alert('" . $_SESSION['alert_message'] . "');</script>";
-        unset($_SESSION['alert_message']);
-    }
+session_start();
+if (isset($_SESSION['alert_message'])) {
+    echo "<script>alert('" . $_SESSION['alert_message'] . "');</script>";
+    unset($_SESSION['alert_message']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -117,9 +117,7 @@
                             <a href="address.php?id=<?php echo $user_id; ?>" class="sidebar-link">
                                 Manage addresses
                             </a>
-                            <a href="#" class="sidebar-link">
-                                Change password
-                            </a>
+
                             <a href="wishlist.php" class="sidebar-link">
                                 <i class="fa-solid fa-bag-shopping"></i>
                                 My Cart
@@ -145,8 +143,6 @@
                     </div>
                 </div>
             <?php } ?>
-
-            <!-- ./sidebar -->
 
             <div class="grid grid-cols-9 md:grid-cols-4 gap-16 w-full col-span-9 ">
                 <?php
@@ -200,7 +196,6 @@
             } ?>
 
             </div>
-            <!-- </div> -->
 
 </body>
 

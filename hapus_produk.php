@@ -1,12 +1,10 @@
 <?php
-// koneksi database
+
 include 'asset/php/connection.php';
-// memulai session
+
 session_start();
 
-// menangkap data yang dikirim melalui URL
 $id = $_GET['id'];
-
 
 if (empty($id)) {
     $_SESSION['alert_message'] = "ID tidak valid!";
@@ -14,7 +12,7 @@ if (empty($id)) {
     exit;
 }
 
-$sql = "DELETE FROM produk WHERE produk_id = '$id'";
+$sql = "DELETE FROM produk WHERE produk_id = $id";
 
 $result = pg_query($conn, $sql);
 
@@ -23,7 +21,7 @@ if ($result) {
     header("location: list_product.php");
     exit;
 } else {
-    $_SESSION['alert_message'] = "Terjadi kesalahan saat menghapus data.";
+    $_SESSION['alert_message'] = "Terjadi kesalahan saat menghapus data: " . pg_last_error($conn);
     header("location: list_product.php");
     exit;
 }

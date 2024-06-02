@@ -1,9 +1,9 @@
 <?php
-    session_start();
-    if (isset($_SESSION['alert_message'])) {
-        echo "<script>alert('" . $_SESSION['alert_message'] . "');</script>";
-        unset($_SESSION['alert_message']);
-    }
+session_start();
+if (isset($_SESSION['alert_message'])) {
+    echo "<script>alert('" . $_SESSION['alert_message'] . "');</script>";
+    unset($_SESSION['alert_message']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,9 +45,7 @@
     }
 
     ?>
-    
 
-    <!-- Banner -->
     <div class="bg-cover bg-no-repeat bg-center py-36">
         <div class="container mx-auto px-6 lg:px-16">
             <h1 class="text-6xl text-gray-800 font-medium mb-4 capitalize">
@@ -59,7 +57,6 @@
             </div>
         </div>
     </div>
-    <!-- ./Banner -->
 
     <div class="container py-16 mx-auto px-6 lg:px-16">
         <h2 class="text-2xl font-medium text-gray-800 uppercase mb-6">Shop by Category</h2>
@@ -76,9 +73,7 @@
             ?>
         </div>
     </div>
-    <!-- ./Categories -->
 
-    <!-- New Arrivals -->
     <div class="container py-16 mx-auto px-6 lg:px-16">
         <h2 class="text-2xl font-medium text-gray-800 uppercase mb-6">Jajanan</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -103,7 +98,6 @@
             ?>
         </div>
     </div>
-    <!-- ./New Arrivals -->
 
 </body>
 

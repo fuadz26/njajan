@@ -1,9 +1,9 @@
 <?php
-    session_start();
-    if (isset($_SESSION['alert_message'])) {
-        echo "<script>alert('" . $_SESSION['alert_message'] . "');</script>";
-        unset($_SESSION['alert_message']);
-    }
+session_start();
+if (isset($_SESSION['alert_message'])) {
+    echo "<script>alert('" . $_SESSION['alert_message'] . "');</script>";
+    unset($_SESSION['alert_message']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -144,10 +144,8 @@
     while ($row = pg_fetch_object($result)) {
         $user_id = $row->user_id;
     ?>
-        <!-- wrapper -->
         <div class="container grid grid-cols-12 items-start gap-6 pt-4 pb-16 mx-auto" style="padding-left: 100px; padding-right: 100px">
 
-            <!-- sidebar -->
             <div class="col-span-3">
                 <div class="sidebar">
                     <div class="sidebar-header">
@@ -157,21 +155,19 @@
                             <h4><?php echo $row->username; ?></h4>
                         </div>
                     </div>
+
                     <div class="sidebar-content">
                         <a href="profile.php" class="sidebar-link">
-                            <i class="fa-regular fa-address-card"></i>
-                            Manage account
+                            <i class="fa-regular fa-address-card"></i> Manage account
                         </a>
-                        <a href="profile.php" class="sidebar-link">
+                        <a href="profile.php" class="sidebar-link ">
                             Profile information
                         </a>
-                        <a href="address.php?id=<?php echo $user_id; ?>" class="sidebar-link">
+                        <a href="address.php?id=<?php echo $row->user_id; ?>" class="sidebar-link ">
                             Manage addresses
                         </a>
-                        <a href="#" class="sidebar-link">
-                            Change password
-                        </a>
-                        <a href="wishlist.php" class=="sidebar-link">
+
+                        <a href="wishlist.php" class="sidebar-link">
                             <i class="fa-solid fa-bag-shopping"></i>
                             My Cart
                         </a>
@@ -179,24 +175,22 @@
                             <i class="fa-solid fa-shop"></i>
                             My Store
                         </a>
-                        <a href="tambah_produk.php" class="sidebar-link">
+                        <a href="tambah_produk.php" class="sidebar-link text-brown-500">
                             Add Product
                         </a>
-                        <a href="list_product.php" class="sidebar-link">
+                        <a href="list_product.php" class="sidebar-link ">
                             Product Listed
                         </a>
-                        <a href="order.php" class="sidebar-link">
-                            Orders
+                        <a href="order.php" class="sidebar-link ">
+                            Order
                         </a>
-                        <a href="asset/php/logout.php" class="sidebar-link">
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                            Logout
+                        <a href="asset/php/logout.php" class="sidebar-link ">
+                            <i class="fa-solid fa-right-from-bracket"></i> Logout
                         </a>
                     </div>
                 </div>
             </div>
         <?php } ?>
-        <!-- ./sidebar -->
         <div class="col-span-9 space-y-4">
             <?php
             $sql = "SELECT k.*, p.*
@@ -208,7 +202,6 @@
             $temp_total = 0;
             while ($row = pg_fetch_object($result)) {
             ?>
-                <!-- Product Card -->
                 <div class="product-card">
                     <img src="<?php echo $row->produk_img; ?>" alt="Product Image">
                     <div class="product-info">
@@ -217,7 +210,7 @@
                     </div>
                     <div class="product-price text-brown-500"><?php echo $row->total_harga ?></div>
                     <div class="text-gray-600 cursor-pointer hover:text-brown-500">
-                        <a href="hapus.php?id=produk_id" class="text-gray-600 cursor-pointer hover:text-brown-500">
+                        <a href="hapus_cart.php?id=<?php echo $row->keranjang_id; ?>" class="text-gray-600 cursor-pointer hover:text-brown-500">
                             <i class="fa-solid fa-trash"></i>
                         </a>
                     </div>
@@ -225,20 +218,15 @@
                 <?php
                 $temp_total += $row->total_harga;
                 ?>
-                <!-- ./Product Card -->
             <?php } ?>
 
-            <!-- Total Price -->
             <p class="flex justify-end mr-10 total-price text-brown-500">Total = <?php echo $temp_total; ?></p>
 
-            <!-- Checkout Button -->
             <div class="flex items-end justify-end pr-10">
                 <a href="checkout.php" class="checkout-button bg-brown-500 hover:bg-transparent hover:text-brown-500 border border-brown-500">Checkout</a>
             </div>
         </div>
-        <!-- ./content -->
         </div>
-        <!-- ./wrapper -->
 </body>
 
 </html>

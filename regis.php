@@ -1,9 +1,9 @@
 <?php
-    session_start();
-    if (isset($_SESSION['alert_message'])) {
-        echo "<script>alert('" . $_SESSION['alert_message'] . "');</script>";
-        unset($_SESSION['alert_message']);
-    }
+session_start();
+if (isset($_SESSION['alert_message'])) {
+    echo "<script>alert('" . $_SESSION['alert_message'] . "');</script>";
+    unset($_SESSION['alert_message']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="asset/css/output.css">
     <title>Document</title>
     <style>
-        /* Tambahkan CSS untuk mengubah warna menjadi coklat */
         .text-green-500 {
             color: #8B4513;
         }
@@ -52,7 +51,6 @@
     <?php
     include 'asset/php/navbar.php';
     ?>
-    <!-- login -->
     <div class="contain py-16">
         <div class="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
             <h2 class="text-2xl uppercase font-medium mb-1">Create an account</h2>
@@ -93,7 +91,6 @@
             </form>
         </div>
     </div>
-    <!-- ./login -->
 </body>
 
 </html>

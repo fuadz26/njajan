@@ -8,7 +8,7 @@ if (isset($_SESSION['user'])) {
     $user_id = $_SESSION['user_id'];
 }
 
-// Query untuk mendapatkan daftar alamat dari tabel
+
 $query = "SELECT * FROM alamatpengiriman WHERE user_id = $user_id";
 $result = pg_query($conn, $query);
 
@@ -18,28 +18,28 @@ if (!$result) {
 
 $alamatpengiriman = pg_fetch_all($result);
 
-// Proses Checkout
+
 if (isset($_POST['checkout'])) {
     $selectedAddressId = $_POST['address-select'];
 
-    // Mendapatkan data alamat yang dipilih
+
     $selectedAddress = pg_fetch_array(pg_query($conn, "SELECT * FROM alamatpengiriman WHERE alamat_id = $selectedAddressId"));
 
-    // Mengambil daftar produk dari keranjang
+
     $keranjangQuery = "SELECT k.*, p.*
                         FROM keranjang k
                         JOIN produk p ON k.produk_id = p.produk_id
                         WHERE k.user_id = $user_id";
     $keranjangResult = pg_query($conn, $keranjangQuery);
 
-    // Memasukkan data ke tabel transaksi
+
     while ($row = pg_fetch_array($keranjangResult)) {
         $keranjangId = $row['keranjang_id'];
         $produkId = $row['produk_id'];
         $quantity = $row['quantity'];
         $totalHarga = $row['total_harga'];
 
-        // Query untuk insert data ke tabel transaksi
+
         $insertQuery = "INSERT INTO transaksi (produk_id, user_id, alamat_pengiriman, total_harga)
         VALUES ($produkId, $user_id, '{$selectedAddress['alamat']}', $totalHarga)";
         $insertResult = pg_query($conn, $insertQuery);
@@ -48,10 +48,10 @@ if (isset($_POST['checkout'])) {
             die("Query error: " . pg_last_error($conn));
         }
 
-        // Mendapatkan transaksi_id dari data yang baru dimasukkan
+
         $transaksiId = pg_fetch_result(pg_query($conn, "SELECT currval(pg_get_serial_sequence('transaksi', 'transaksi_id'))"), 0);
 
-        // Memasukkan data ke tabel transaksi_produk
+
         $insertTransaksiProdukQuery = "INSERT INTO transaksi_produk (transaksi_id, produk_id, jumlah)
         VALUES ($transaksiId, $produkId, $quantity)";
         $insertTransaksiProdukResult = pg_query($conn, $insertTransaksiProdukQuery);
@@ -60,7 +60,7 @@ if (isset($_POST['checkout'])) {
             die("Query error: " . pg_last_error($conn));
         }
 
-        // Menghapus data keranjang setelah checkout
+
         $deleteKeranjangQuery = "DELETE FROM keranjang WHERE keranjang_id = $keranjangId";
         $deleteKeranjangResult = pg_query($conn, $deleteKeranjangQuery);
 
@@ -69,7 +69,6 @@ if (isset($_POST['checkout'])) {
         }
     }
 
-    // Redirect ke halaman sukses atau halaman lain yang diinginkan
     header("Location: checkout_sukses.php");
     exit();
 }
@@ -88,19 +87,14 @@ if (isset($_POST['checkout'])) {
     <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="asset/css/output.css">
     <style>
-        /* CSS untuk mengubah warna tombol menjadi coklat */
         .btn-checkout {
             background-color: #964B00;
-            /* Warna latar belakang coklat */
             border-color: #964B00;
-            /* Warna border coklat */
         }
 
         .btn-checkout:hover {
             background-color: transparent;
-            /* Warna latar belakang transparan saat hover */
             color: #964B00;
-            /* Warna teks coklat saat hover */
         }
     </style>
     <title>Home</title>
@@ -109,7 +103,6 @@ if (isset($_POST['checkout'])) {
 <body>
     <?php include 'asset/php/navbar.php'; ?>
 
-    <!-- wrapper -->
     <div class="container grid grid-cols-12 items-start gap-6 pt-4 pb-16 mx-auto" style="padding-left: 100px; padding-right: 100px;">
         <div class="col-span-8 border border-gray-200 p-4 rounded">
             <h3 class="text-lg font-medium capitalize mb-4">Checkout</h3>
@@ -167,11 +160,9 @@ if (isset($_POST['checkout'])) {
             </div>
         </div>
     </div>
-    <!-- /wrapper -->
 
     <script src="asset/js/main.js"></script>
     <script>
-        // Update address details on select change
         const addressSelect = document.getElementById('address-select');
         const addressDetails = document.getElementById('address-details');
         const addressInfo = document.getElementById('address-info');
