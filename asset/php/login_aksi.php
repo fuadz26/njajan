@@ -7,7 +7,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Cek username dan password di tabel users dengan is_verif = 1
     $sql = "SELECT user_id FROM users WHERE username = '$username' AND password = '$password' AND is_verif = 1";
     $result = pg_query($conn, $sql);
 
@@ -19,7 +18,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         header('Location: ../../index.php');
         exit;
     } else {
-        // Jika tidak ada cocok di tabel users, cek di tabel admin
+
         $sql = "SELECT admin_id FROM admin WHERE admin_name = '$username' AND admin_pass = '$password'";
         $result = pg_query($conn, $sql);
 
@@ -42,4 +41,3 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     header('Location: /login.php');
     exit;
 }
-?>

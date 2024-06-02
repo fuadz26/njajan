@@ -42,14 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $filePath = 'default.jpg';
     }
-    $awsConfig = [
-        'version' => 'latest',
-        'region'  => 'ap-northeast-3',
-        'credentials' => [
-            'key'    => 'AKIA5FTZEUCNVLLQKMEP',
-            'secret' => '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',
-        ],
-    ];
+
 
 
     $s3Client = new S3Client($awsConfig);

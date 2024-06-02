@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,11 +12,10 @@
     <link rel="stylesheet" href="../css/output.css">
     <title>Njajan</title>
     <style>
-        /* Default styling for larger screens */
         .search-form {
             width: 100%;
             max-width: 36rem;
-            /* Max width of 576px */
+
         }
 
         .search-input,
@@ -25,11 +23,11 @@
             display: flex;
         }
 
-        /* Media query for smaller screens */
+
         @media (max-width: 768px) {
             .search-form {
                 max-width: 100%;
-                /* Allow the form to take full width */
+
             }
 
             .search-input,
@@ -40,7 +38,7 @@
 
             .search-input {
                 border-right: 1px solid #8B4513;
-                /* Re-add right border to the input */
+
             }
         }
 
@@ -97,7 +95,6 @@
     <?php
     include 'connection.php';
     ?>
-    <!-- header -->
     <header class="py-4 shadow-sm bg-beige">
         <div class="container flex items-center justify-between mx-auto">
             <a href="../../index.php" class="text-brown font-bold">NJAJAN</a>
@@ -126,9 +123,7 @@
             </div>
         </div>
     </header>
-    <!-- ./header -->
 
-    <!-- navbar -->
     <nav class="bg-brown">
         <div class="container flex mx-auto px-6 lg:px-16">
             <div class="px-8 py-4 bg-brown text-beige md:flex items-center cursor-pointer relative group hidden">
@@ -143,7 +138,7 @@
                     $result = pg_query($conn, $sql);
                     while ($row = pg_fetch_object($result)) {
                     ?>
-                        <!-- dropdown -->
+
                         <a href="../../search.php?id=<?php echo $row->kategori_id; ?>" class="flex items-center px-6 py-3 hover:bg-gray-100 transition">
                             <img src="<?php echo $row->kategori_img; ?>" alt="category" class="w-5 h-5 object-contain">
                             <span class="ml-6 text-gray-600 text-sm"><?php echo $row->nama_kategori; ?></span>
@@ -165,7 +160,7 @@
             </div>
         </div>
     </nav>
-    <!-- ./navbar -->
+
 </body>
 
 </html>
